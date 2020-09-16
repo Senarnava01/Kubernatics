@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuberdeployed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Kubernatics
+  template:
+    metadata:
+      labels:
+        app: Kubernatics
+    spec:
+      containers:
+      - name: kuberrepos
+        image: 856737kubernatics.azurecr.io/kuberrepos:latest
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: dsconfigsn
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dockersampleconfig
+spec:kuberntics
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: Kubernatics
